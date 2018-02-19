@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Assignment Javascript 2</title>
+    <style>
+    table,
+    th,
+    td {
+        width: 100%;
+        height: 100%;
+        margin: 10px 0;
+        border: solid 1px #333;
+        padding: 2px 4px;
+        /*font:15px Verdana;*/
+    }
+
+    th {
+        font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+    <h2>Type Repo_name</h2>
+    <input type="text" id="myInput" onkeyup="mySearchFunction()" placeholder="Search for Repo_names.." title="Type in a name">
+    <input type="button" onclick="CreateTable()" value="Create Table To search Data" />
+    <div id="showData"></div>
+</body>
+<script>
+var table = document.createElement("table");
+
+function CreateTable() {
+    var dataJSON = [
+
+        {
+            "Repo_Name": "https://github.com/tensorflow/tensorflow.git",
+            "Branches": "18",
+            "Issues_Count": "1181",
+            "Watchers": "7445",
+            "Commits": "28703",
+            "Contributors": "1336",
+            "Stars": "89548"
+        },
+        {
+            "Repo_Name": "https://github.com/kelseyhightower/nocode.git",
+            "Branches": "1",
+            "Issues_Count": "1491",
+            "Watchers": "173",
+            "Commits": "3",
+            "Contributors": "1",
+            "Stars": "13906"
+        },
+        {
+            "Repo_Name": "https://github.com/yangshun/front-end-interview-handbook.git",
+            "Branches": "1",
+            "Issues_Count": "6",
+            "Watchers": "206",
+            "Commits": "180",
+            "Contributors": "54",
+            "Stars": "5809"
+        },
+        {
+            "Repo_Name": "https://github.com/automerge/automerge.git",
+            "Branches": "3",
+            "Issues_Count": "9",
+            "Watchers": "107",
+            "Commits": "199",
+            "Contributors": "10",
+            "Stars": "4452"
+        },
+        {
+            "Repo_Name": "https://github.com/checkstyle/checkstyle.git",
+            "Branches": "1",
+            "Issues_Count": "434",
+            "Watchers": "176",
+            "Commits": "7524",
+            "Contributors": "168",
+            "Stars": "3291"
+        },
+        {
+            "Repo_Name": "https://github.com/arialdomartini/Back-End-Developer-Interview-Questions.git",
+            "Branches": "1",
+            "Issues_Count": "10",
+            "Watchers": "162",
+            "Commits": "297",
+            "Contributors": "9",
+            "Stars": "3342"
+        },
+        {
+            "Repo_Name": "https://github.com/bradley/Blotter.git",
+            "Branches": "13",
+            "Issues_Count": "3",
+            "Watchers": "18",
+            "Commits": "204",
+            "Contributors": "2",
+            "Stars": "761"
+        },
+        {
+            "Repo_Name": "https://github.com/GhostText/GhostText.git",
+            "Branches": "3",
+            "Issues_Count": "22",
+            "Watchers": "22",
+            "Commits": "219",
+            "Contributors": "10",
+            "Stars": "820"
+        },
+        {
+            "Repo_Name": "https://github.com/joshwcomeau/waveforms.git",
+            "Branches": "1",
+            "Issues_Count": "1",
+            "Watchers": "10",
+            "Commits": "259",
+            "Contributors": "1",
+            "Stars": "475"
+        },
+        {
+            "Repo_Name": "https://github.com/photonstorm/phaser.git",
+            "Branches": "4",
+            "Issues_Count": "17",
+            "Watchers": "1106",
+            "Commits": "8858",
+            "Contributors": "293",
+            "Stars": "18461"
+        },
+        {
+            "Repo_Name": "https://github.com/facebookresearch/TensorComprehensions.git",
+            "Branches": "7",
+            "Issues_Count": "7",
+            "Watchers": "41",
+            "Commits": "25",
+            "Contributors": "8",
+            "Stars": "558"
+        }
+    ]
+    var col = [];
+    for (var i = 0; i < dataJSON.length; i++) {
+        for (var key in dataJSON[i]) {
+            if (col.indexOf(key) === -1) {
+                col.push(key);
+            }
+        }
+    }
+
+
+    var tr = table.insertRow(-1);
+
+    for (var i = 0; i < col.length; i++) {
+        var th = document.createElement("th");
+        th.innerHTML = col[i];
+        tr.appendChild(th);
+    }
+
+    for (var i = 0; i < dataJSON.length; i++) {
+
+        tr = table.insertRow(-1);
+
+        for (var j = 0; j < col.length; j++) {
+            var tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = dataJSON[i][col[j]];
+        }
+    }
+
+    var divContainer = document.getElementById("showData");
+    divContainer.innerHTML = "";
+    divContainer.appendChild(table);
+}
+
+function mySearchFunction() {
+    var input, filter, table1, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table1 = document.getElementById('showData').getElementsByTagName('table')[0]
+    tr = table1.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>
+
+
+</html>
